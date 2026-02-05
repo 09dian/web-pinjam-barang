@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Matkul;
 
 
 class Pinjaman extends Model
@@ -20,5 +21,13 @@ class Pinjaman extends Model
         'date_mengembalikan',
         'penerima',
     ];
+
+    public function guru()
+    {
+        return $this->belongsTo(Guru::class, 'name_guru', 'name');
+    }
+    
+
+    
 }
 
