@@ -21,13 +21,7 @@ class BarangBelumKembali extends TableWidget
     {
         return $table
             ->query(fn(): Builder => Pinjaman::query())
-            ->headerActions([
-                Action::make('pinjam')
-                    ->label('Pinjamkan Barang')
-                    ->icon('heroicon-o-plus')
-                    ->color('primary')->url(route('filament.admin.resources.pinjamen.create'))
-
-            ])
+            ->headerActions([Action::make('pinjam')->label('Pinjamkan Barang')->icon('heroicon-o-plus')->color('primary')->url(route('filament.admin.resources.pinjamen.create'))])
 
             ->columns([
                 TextColumn::make('name')->searchable(),
@@ -36,21 +30,15 @@ class BarangBelumKembali extends TableWidget
                 TextColumn::make('matpel')->searchable(),
                 TextColumn::make('kelas')->searchable(),
 
-                TextColumn::make('date_meminjam')
-                    ->date()
-                    ->sortable(),
-
-                TextColumn::make('date_mengembalikan')
-                    ->badge()
-                    ->placeholder('Belum Kembali')
-                    ->color(fn($state) => $state ? 'success' : 'danger')
-                    ->formatStateUsing(fn($state) => $state ? 'Sudah Kembali' : 'Belum Kembali'),
+                TextColumn::make('date_meminjam')->date()->sortable(),
+                TextColumn::make('date_mengembalikan')->badge()
+                ->placeholder('Belum Kembali')
+                ->color(fn($state) => $state === null ? 'danger' : 'success')
+                ->formatStateUsing(fn($state) => $state ? 'Sudah Kembali' : 'Belum Kembali'),
 
                 TextColumn::make('penerima')->searchable(),
 
-                TextInputColumn::make('catatan')
-                    ->label('Catatan')
-                    ->placeholder('Tulis catatan di sini'),
+                TextInputColumn::make('catatan')->label('Catatan')->placeholder('Tulis catatan di sini'),
 
                 ToggleColumn::make('action')
                     ->label('Kembalikan')
@@ -63,15 +51,10 @@ class BarangBelumKembali extends TableWidget
                                 'action' => true,
                             ]);
 
-                            Notification::make()
-                                ->title('Barang berhasil dikembalikan')
-                                ->success()
-                                ->send();
+                            Notification::make()->title('Barang berhasil dikembalikan')->success()->send();
                         }
                     }),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([]),
-            ]);
+            ->toolbarActions([BulkActionGroup::make([])]);
     }
 }
