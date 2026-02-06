@@ -20,6 +20,8 @@ class Pinjaman extends Model
         'date_meminjam',
         'date_mengembalikan',
         'penerima',
+        'catatan',
+        'action',
     ];
 
     public function guru()

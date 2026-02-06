@@ -48,8 +48,7 @@ class PinjamenTable
                     ->date(),
 
                 TextColumn::make('date_mengembalikan')
-                    ->label('Tanggal Kembali')
-                    ->date(),
+                    ->label('Tanggal Kembali'),
 
                 TextColumn::make('penerima')
                     ->label('Penerima'),

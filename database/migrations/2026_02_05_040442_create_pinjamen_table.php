@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('matpel');
             $table->string('kelas');
             $table->date('date_meminjam');
-            $table->date('date_mengembalikan');
+            $table->date('date_mengembalikan')->nullable();
             $table->string('penerima');
+            $table->text('catatan')->nullable();
+            $table->boolean('action')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

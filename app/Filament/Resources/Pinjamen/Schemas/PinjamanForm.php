@@ -30,22 +30,24 @@ class PinjamanForm
                 Select::make('matpel')
     ->label('Mata Pelajaran')
     ->options(function () {
-        return Matkul::pluck('name', 'id'); 
+        return Matkul::pluck('name', 'name'); 
     })
     ->required(),
                 Select::make('kelas')
                 ->label('Kelas')->options(function () {
-        return Kelas::pluck('name', 'id'); 
+        return Kelas::pluck('name', 'name'); 
     })
     ->required(),
 
             DatePicker::make('date_meminjam')
                 ->label('Tanggal Pinjam')
                 ->default(now())
-                ->required(),
+                ->required()->readOnly(),
 
-            DatePicker::make('date_mengembalikan')
-                ->label('Tanggal Kembali')->default(now()),
+            TextInput::make('date_mengembalikan')
+                ->label('Tanggal Kembali')
+               ->readOnly()
+                ->dehydrated(false),
 
             TextInput::make('penerima')
                 ->label('Penerima/yang memijamkan'),
